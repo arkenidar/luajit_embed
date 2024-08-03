@@ -1,0 +1,1 @@
+gcc embed_test_01.c -L/home/dario/luajit/src -I/home/dario/luajit/src -lluajit-5.1.dll

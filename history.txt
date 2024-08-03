@@ -1,0 +1,282 @@
+
+dario@win11 MINGW64 ~
+$ cd "C:\0\Dropbox\projects"
+
+dario@win11 MINGW64 /c/0/Dropbox/projects
+$ ls
+0-learning      gh--not_in_github     java_spring_jpa        lua_ffibuild
+1-video_making  java-spring-db-crud   java_spring_putia      php_http_apps_todo
+dotnet-server   java_aiputia          lua-ffibuild-sdl-apps  spring.code-workspace
+gh--in_github   java_spring_delivery  lua_ffi-luajit-sdl
+
+dario@win11 MINGW64 /c/0/Dropbox/projects
+$ cd gh--not_in_github/
+
+dario@win11 MINGW64 /c/0/Dropbox/projects/gh--not_in_github
+$ ls
+brain-teaser-1.py               js-fixed-trunc.txt   primes-count-factors--01.py
+console.log--replacement.html   js-json-types.txt    primes-count-factors--02.py
+express-vercel                  links.php            primes-count-factors.py
+express-vercel.code-workspace   luajit_embed         ts_express_vercel
+input--integer-or-decimal.html  message-synchro.txt  unversioned--luajit-ffi
+
+dario@win11 MINGW64 /c/0/Dropbox/projects/gh--not_in_github
+$ cd luajit_embed/
+
+dario@win11 MINGW64 /c/0/Dropbox/projects/gh--not_in_github/luajit_embed
+$ ls
+embed_test_01.c  test.lua  usage.txt
+
+dario@win11 MINGW64 /c/0/Dropbox/projects/gh--not_in_github/luajit_embed
+$ gcc embed_test_01.c $(pkg-config --cflags --libs luajit) -o app
+-bash: pkg-config: command not found
+embed_test_01.c:2:10: fatal error: lua.h: No such file or directory
+    2 | #include <lua.h>
+      |          ^~~~~~~
+compilation terminated.
+
+dario@win11 MINGW64 /c/0/Dropbox/projects/gh--not_in_github/luajit_embed
+$ pacman -Ss pkgconf | grep mingw64
+mingw64/mingw-w64-x86_64-pkgconf 1~2.2.0-1 (mingw-w64-x86_64-toolchain)
+mingw64/mingw-w64-x86_64-python-pkgconfig 1.5.5-3
+mingw64/mingw-w64-x86_64-ruby-pkg-config 1.4.9-1
+
+dario@win11 MINGW64 /c/0/Dropbox/projects/gh--not_in_github/luajit_embed
+$ pacman -S mingw-w64-x86_64-pkgconf
+resolving dependencies...
+looking for conflicting packages...
+
+Packages (1) mingw-w64-x86_64-pkgconf-1~2.2.0-1
+
+Total Download Size:   0.08 MiB
+Total Installed Size:  0.50 MiB
+
+:: Proceed with installation? [Y/n]
+:: Retrieving packages...
+ mingw-w64-x86_64-pkgconf-1...    84.4 KiB  24.4 KiB/s 00:03 [###############################] 100%
+(1/1) checking keys in keyring                               [###############################] 100%
+(1/1) checking package integrity                             [###############################] 100%
+(1/1) loading package files                                  [###############################] 100%
+(1/1) checking for file conflicts                            [###############################] 100%
+(1/1) checking available disk space                          [###############################] 100%
+:: Processing package changes...
+(1/1) installing mingw-w64-x86_64-pkgconf                    [###############################] 100%
+
+dario@win11 MINGW64 /c/0/Dropbox/projects/gh--not_in_github/luajit_embed
+$ gcc embed_test_01.c $(pkg-config --cflags --libs luajit) -o app
+/usr/lib/gcc/x86_64-pc-msys/13.3.0/../../../../x86_64-pc-msys/bin/ld: cannot find -lluajit-5.1: No such file or directory
+collect2: error: ld returned 1 exit status
+
+dario@win11 MINGW64 /c/0/Dropbox/projects/gh--not_in_github/luajit_embed
+$ cd /home/dario/luajit/ && make install
+==== Installing LuaJIT 2.1.1720049189 to /usr/local ====
+mkdir -p /usr/local/bin /usr/local/lib /usr/local/include/luajit-2.1 /usr/local/share/man/man1 /usr/local/lib/pkgconfig /usr/local/share/luajit-2.1/jit /usr/local/share/lua/5.1 /usr/local/lib/lua/5.1
+cd src && install -m 0755 luajit /usr/local/bin/luajit-2.1.1720049189
+cd src && test -f libluajit.a && install -m 0644 libluajit.a /usr/local/lib/libluajit-5.1.a || :
+rm -f /usr/local/lib/libluajit-5.1.so.2.1.1720049189 /usr/local/lib/libluajit-5.1.so /usr/local/lib/libluajit-5.1.so.2
+cd src && test -f libluajit.so && \
+  install -m 0755 libluajit.so /usr/local/lib/libluajit-5.1.so.2.1.1720049189 && \
+  ( ldconfig -n 2>/dev/null /usr/local/lib || : ) && \
+  ln -sf libluajit-5.1.so.2.1.1720049189 /usr/local/lib/libluajit-5.1.so && \
+  ln -sf libluajit-5.1.so.2.1.1720049189 /usr/local/lib/libluajit-5.1.so.2 || :
+cd etc && install -m 0644 luajit.1 /usr/local/share/man/man1
+cd etc && sed -e "s|^prefix=.*|prefix=/usr/local|" -e "s|^multilib=.*|multilib=lib|" -e "s|^relver=.*|relver=1720049189|" luajit.pc > luajit.pc.tmp && \
+  install -m 0644 luajit.pc.tmp /usr/local/lib/pkgconfig/luajit.pc && \
+  rm -f luajit.pc.tmp
+cd src && install -m 0644 lua.h lualib.h lauxlib.h luaconf.h lua.hpp luajit.h /usr/local/include/luajit-2.1
+cd src/jit && install -m 0644 bc.lua bcsave.lua dump.lua p.lua v.lua zone.lua dis_x86.lua dis_x64.lua dis_arm.lua dis_arm64.lua dis_arm64be.lua dis_ppc.lua dis_mips.lua dis_mipsel.lua dis_mips64.lua dis_mips64el.lua dis_mips64r6.lua dis_mips64r6el.lua vmdef.lua /usr/local/share/luajit-2.1/jit
+ln -sf luajit-2.1.1720049189 /usr/local/bin/luajit
+==== Successfully installed LuaJIT 2.1.1720049189 to /usr/local ====
+
+dario@win11 MINGW64 ~/luajit
+$ cd /c/0/Dropbox/projects/gh--not_in_github/luajit_embed
+
+dario@win11 MINGW64 /c/0/Dropbox/projects/gh--not_in_github/luajit_embed
+$ gcc embed_test_01.c $(pkg-config --cflags --libs luajit) -o app
+/usr/lib/gcc/x86_64-pc-msys/13.3.0/../../../../x86_64-pc-msys/bin/ld: cannot find -lluajit-5.1: No such file or directory
+collect2: error: ld returned 1 exit status
+
+dario@win11 MINGW64 /c/0/Dropbox/projects/gh--not_in_github/luajit_embed
+$ gcc embed_test_01.c -L/usr/local/lib $(pkg-config --cflags --libs luajit) -o app
+/usr/lib/gcc/x86_64-pc-msys/13.3.0/../../../../x86_64-pc-msys/bin/ld: cannot find -lluajit-5.1: No such file or directory
+collect2: error: ld returned 1 exit status
+
+dario@win11 MINGW64 /c/0/Dropbox/projects/gh--not_in_github/luajit_embed
+$ file /usr/local/lib/libluajit-5.1.a
+/usr/local/lib/libluajit-5.1.a: cannot open `/usr/local/lib/libluajit-5.1.a' (No such file or directory)
+
+dario@win11 MINGW64 /c/0/Dropbox/projects/gh--not_in_github/luajit_embed
+$ pkg-config --cflags --libs luajit
+-IC:/msys64/mingw64/include/luajit-2.1 -lluajit-5.1
+
+dario@win11 MINGW64 /c/0/Dropbox/projects/gh--not_in_github/luajit_embed
+$ file /usr/local/lib/
+lua/       pkgconfig/
+
+dario@win11 MINGW64 /c/0/Dropbox/projects/gh--not_in_github/luajit_embed
+$ ls /usr/local/lib/lua/5.1/
+
+dario@win11 MINGW64 /c/0/Dropbox/projects/gh--not_in_github/luajit_embed
+$ ls /usr/local/lib/lua
+5.1
+
+dario@win11 MINGW64 /c/0/Dropbox/projects/gh--not_in_github/luajit_embed
+$ ls /usr/local/lib
+lua  pkgconfig
+
+dario@win11 MINGW64 /c/0/Dropbox/projects/gh--not_in_github/luajit_embed
+$ cat /usr/local/lib/pkgconfig/luajit.pc
+# Package information for LuaJIT to be used by pkg-config.
+majver=2
+minver=1
+relver=1720049189
+version=${majver}.${minver}.${relver}
+abiver=5.1
+
+prefix=/usr/local
+multilib=lib
+exec_prefix=${prefix}
+libdir=${exec_prefix}/${multilib}
+libname=luajit-${abiver}
+includedir=${prefix}/include/luajit-${majver}.${minver}
+
+INSTALL_LMOD=${prefix}/share/lua/${abiver}
+INSTALL_CMOD=${prefix}/${multilib}/lua/${abiver}
+
+Name: LuaJIT
+Description: Just-in-time compiler for Lua
+URL: https://luajit.org
+Version: ${version}
+Requires:
+Libs: -L${libdir} -l${libname}
+Libs.private: -Wl,-E -lm -ldl
+Cflags: -I${includedir}
+
+dario@win11 MINGW64 /c/0/Dropbox/projects/gh--not_in_github/luajit_embed
+$ pkg-config --cflags --libs luajit
+-IC:/msys64/mingw64/include/luajit-2.1 -lluajit-5.1
+
+dario@win11 MINGW64 /c/0/Dropbox/projects/gh--not_in_github/luajit_embed
+$ cd /home/dario/luajit/ && make install
+==== Installing LuaJIT 2.1.1720049189 to /usr/local ====
+mkdir -p /usr/local/bin /usr/local/lib /usr/local/include/luajit-2.1 /usr/local/share/man/man1 /usr/local/lib/pkgconfig /usr/local/share/luajit-2.1/jit /usr/local/share/lua/5.1 /usr/local/lib/lua/5.1
+cd src && install -m 0755 luajit /usr/local/bin/luajit-2.1.1720049189
+cd src && test -f libluajit.a && install -m 0644 libluajit.a /usr/local/lib/libluajit-5.1.a || :
+rm -f /usr/local/lib/libluajit-5.1.so.2.1.1720049189 /usr/local/lib/libluajit-5.1.so /usr/local/lib/libluajit-5.1.so.2
+cd src && test -f libluajit.so && \
+  install -m 0755 libluajit.so /usr/local/lib/libluajit-5.1.so.2.1.1720049189 && \
+  ( ldconfig -n 2>/dev/null /usr/local/lib || : ) && \
+  ln -sf libluajit-5.1.so.2.1.1720049189 /usr/local/lib/libluajit-5.1.so && \
+  ln -sf libluajit-5.1.so.2.1.1720049189 /usr/local/lib/libluajit-5.1.so.2 || :
+cd etc && install -m 0644 luajit.1 /usr/local/share/man/man1
+cd etc && sed -e "s|^prefix=.*|prefix=/usr/local|" -e "s|^multilib=.*|multilib=lib|" -e "s|^relver=.*|relver=1720049189|" luajit.pc > luajit.pc.tmp && \
+  install -m 0644 luajit.pc.tmp /usr/local/lib/pkgconfig/luajit.pc && \
+  rm -f luajit.pc.tmp
+cd src && install -m 0644 lua.h lualib.h lauxlib.h luaconf.h lua.hpp luajit.h /usr/local/include/luajit-2.1
+cd src/jit && install -m 0644 bc.lua bcsave.lua dump.lua p.lua v.lua zone.lua dis_x86.lua dis_x64.lua dis_arm.lua dis_arm64.lua dis_arm64be.lua dis_ppc.lua dis_mips.lua dis_mipsel.lua dis_mips64.lua dis_mips64el.lua dis_mips64r6.lua dis_mips64r6el.lua vmdef.lua /usr/local/share/luajit-2.1/jit
+ln -sf luajit-2.1.1720049189 /usr/local/bin/luajit
+==== Successfully installed LuaJIT 2.1.1720049189 to /usr/local ====
+
+dario@win11 MINGW64 ~/luajit
+$ ls
+COPYRIGHT  Makefile  README  doc  dynasm  etc  src
+
+dario@win11 MINGW64 ~/luajit
+$ cd src/
+host/ jit/
+
+dario@win11 MINGW64 ~/luajit
+$ cd src/
+host/ jit/
+
+dario@win11 MINGW64 ~/luajit
+$ cd src/
+host/ jit/
+
+dario@win11 MINGW64 ~/luajit
+$ cd src/
+host/ jit/
+
+dario@win11 MINGW64 ~/luajit
+$ cd src/
+host/ jit/
+
+dario@win11 MINGW64 ~/luajit
+$ ls src/host/
+README     buildvm.exe  buildvm.o       buildvm_asm.c  buildvm_fold.c  buildvm_lib.c  buildvm_libbc.h  buildvm_peobj.o  genminilua.lua  minilua.c    minilua.o
+buildvm.c  buildvm.h    buildvm_arch.h  buildvm_asm.o  buildvm_fold.o  buildvm_lib.o  buildvm_peobj.c  genlibbc.lua     genversion.lua  minilua.exe
+
+dario@win11 MINGW64 ~/luajit
+$ ls src/
+Display all 245 possibilities? (y or n)
+
+dario@win11 MINGW64 ~/luajit
+$ ls src/
+Makefile      lib_math.c           lj_asm_ppc.h    lj_ccallback.h  lj_debug.c       lj_func.c    lj_load.o        lj_opt_split.o  lj_str.c           lj_traceerr.h      msvcbuild.bat
+Makefile.dep  lib_math.o           lj_asm_x86.h    lj_ccallback.o  lj_debug.h       lj_func.h    lj_mcode.c       lj_parse.c      lj_str.h           lj_udata.c         nxbuild.bat
+host          lib_os.c             lj_assert.c     lj_cconv.c      lj_debug.o       lj_func.o    lj_mcode.h       lj_parse.h      lj_str.o           lj_udata.h         ps4build.bat
+jit           lib_os.o             lj_assert.o     lj_cconv.h      lj_def.h         lj_gc.c      lj_mcode.o       lj_parse.o      lj_strfmt.c        lj_udata.o         ps5build.bat
+lauxlib.h     lib_package.c        lj_bc.c         lj_cconv.o      lj_dispatch.c    lj_gc.h      lj_meta.c        lj_prng.c       lj_strfmt.h        lj_vm.h            psvitabuild.bat
+lib_aux.c     lib_package.o        lj_bc.h         lj_cdata.c      lj_dispatch.h    lj_gc.o      lj_meta.h        lj_prng.h       lj_strfmt.o        lj_vm.o            vm_arm.dasc
+lib_aux.o     lib_string.c         lj_bc.o         lj_cdata.h      lj_dispatch.o    lj_gdbjit.c  lj_meta.o        lj_prng.o       lj_strfmt_num.c    lj_vmevent.c       vm_arm64.dasc
+lib_base.c    lib_string.o         lj_bcdef.h      lj_cdata.o      lj_emit_arm.h    lj_gdbjit.h  lj_obj.c         lj_profile.c    lj_strfmt_num.o    lj_vmevent.h       vm_mips.dasc
+lib_base.o    lib_table.c          lj_bcdump.h     lj_char.c       lj_emit_arm64.h  lj_gdbjit.o  lj_obj.h         lj_profile.h    lj_strscan.c       lj_vmevent.o       vm_mips64.dasc
+lib_bit.c     lib_table.o          lj_bcread.c     lj_char.h       lj_emit_mips.h   lj_ir.c      lj_obj.o         lj_profile.o    lj_strscan.h       lj_vmmath.c        vm_ppc.dasc
+lib_bit.o     libluajit-5.1.dll.a  lj_bcread.o     lj_char.o       lj_emit_ppc.h    lj_ir.h      lj_opt_dce.c     lj_recdef.h     lj_strscan.o       lj_vmmath.o        vm_x64.dasc
+lib_buffer.c  lj_alloc.c           lj_bcwrite.c    lj_clib.c       lj_emit_x86.h    lj_ir.o      lj_opt_dce.o     lj_record.c     lj_tab.c           ljamalg.c          vm_x86.dasc
+lib_buffer.o  lj_alloc.h           lj_bcwrite.o    lj_clib.h       lj_err.c         lj_ircall.h  lj_opt_fold.c    lj_record.h     lj_tab.h           lua.h              xb1build.bat
+lib_debug.c   lj_alloc.o           lj_buf.c        lj_clib.o       lj_err.h         lj_iropt.h   lj_opt_fold.o    lj_record.o     lj_tab.o           lua.hpp            xedkbuild.bat
+lib_debug.o   lj_api.c             lj_buf.h        lj_cparse.c     lj_err.o         lj_jit.h     lj_opt_loop.c    lj_serialize.c  lj_target.h        lua51.dll
+lib_ffi.c     lj_api.o             lj_buf.o        lj_cparse.h     lj_errmsg.h      lj_lex.c     lj_opt_loop.o    lj_serialize.h  lj_target_arm.h    luaconf.h
+lib_ffi.o     lj_arch.h            lj_carith.c     lj_cparse.o     lj_ff.h          lj_lex.h     lj_opt_mem.c     lj_serialize.o  lj_target_arm64.h  luajit.c
+lib_init.c    lj_asm.c             lj_carith.h     lj_crecord.c    lj_ffdef.h       lj_lex.o     lj_opt_mem.o     lj_snap.c       lj_target_mips.h   luajit.exe
+lib_init.o    lj_asm.h             lj_carith.o     lj_crecord.h    lj_ffrecord.c    lj_lib.c     lj_opt_narrow.c  lj_snap.h       lj_target_ppc.h    luajit.h
+lib_io.c      lj_asm.o             lj_ccall.c      lj_crecord.o    lj_ffrecord.h    lj_lib.h     lj_opt_narrow.o  lj_snap.o       lj_target_x86.h    luajit.o
+lib_io.o      lj_asm_arm.h         lj_ccall.h      lj_ctype.c      lj_ffrecord.o    lj_lib.o     lj_opt_sink.c    lj_state.c      lj_trace.c         luajit_relver.txt
+lib_jit.c     lj_asm_arm64.h       lj_ccall.o      lj_ctype.h      lj_folddef.h     lj_libdef.h  lj_opt_sink.o    lj_state.h      lj_trace.h         luajit_rolling.h
+lib_jit.o     lj_asm_mips.h        lj_ccallback.c  lj_ctype.o      lj_frame.h       lj_load.c    lj_opt_split.c   lj_state.o      lj_trace.o         lualib.h
+
+dario@win11 MINGW64 ~/luajit
+$ file /home/dario/luajit/src/libluajit-5.1.a
+/home/dario/luajit/src/libluajit-5.1.a: cannot open `/home/dario/luajit/src/libluajit-5.1.a' (No such file or directory)
+
+dario@win11 MINGW64 ~/luajit
+$ file /home/dario/luajit/src/libluajit-5.1.dll.a
+/home/dario/luajit/src/libluajit-5.1.dll.a: current ar archive
+
+dario@win11 MINGW64 ~/luajit
+$ pkg-config --cflags --libs luajit
+-IC:/msys64/mingw64/include/luajit-2.1 -lluajit-5.1
+
+dario@win11 MINGW64 ~/luajit
+$ cd /c/0/Dropbox/projects/gh--not_in_github/luajit_embed
+
+dario@win11 MINGW64 /c/0/Dropbox/projects/gh--not_in_github/luajit_embed
+$ pkg-config --cflags --libs luajit
+-IC:/msys64/mingw64/include/luajit-2.1 -lluajit-5.1
+
+dario@win11 MINGW64 /c/0/Dropbox/projects/gh--not_in_github/luajit_embed
+$ gcc embed_test_01.c -L/home/dario/luajit/src -I/home/dario/luajit/src -lluajit-5.1.dll
+
+dario@win11 MINGW64 /c/0/Dropbox/projects/gh--not_in_github/luajit_embed
+$ ls
+a.exe  embed_test_01.c  test.lua  usage.txt
+
+dario@win11 MINGW64 /c/0/Dropbox/projects/gh--not_in_github/luajit_embed
+$ ./a
+address: (null), port: 0
+
+dario@win11 MINGW64 /c/0/Dropbox/projects/gh--not_in_github/luajit_embed
+$ ./a test
+attempt to call a string value
+
+dario@win11 MINGW64 /c/0/Dropbox/projects/gh--not_in_github/luajit_embed
+$ ./a test.lua
+address: 255.255.255.255, port: 67
+
+dario@win11 MINGW64 /c/0/Dropbox/projects/gh--not_in_github/luajit_embed
+$ cat test.lua
+address = '255.255.255.255'
+port = 67
+dario@win11 MINGW64 /c/0/Dropbox/projects/gh--not_in_github/luajit_embed
+$

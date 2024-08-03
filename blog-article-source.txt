@@ -1,0 +1,5 @@
+blog article as original source
+https://en.blog.nic.cz/2015/08/12/embedding-luajit-in-30-minutes-or-so/
+
+my work on it
+https://docs.google.com/document/d/1T0G-wYv1_kGALIA5R9YA0YA59qD5Dr_vtB-EUe0JFeQ/edit?usp=sharing

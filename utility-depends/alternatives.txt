@@ -1,0 +1,17 @@
+dumpbin from Visual Studio tools (VC\bin folder) can help here:
+
+dumpbin /dependents your_dll_file.dll
+
+
+-----------------------------------
+
+https://github.com/dmarquant/deps
+Deps - Dependency Analyzer for Windows
+
+-----------------------------------
+
+tasklist /m
+
+-----------------------------------
+
+https://dependencywalker.com/

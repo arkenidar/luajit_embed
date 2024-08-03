@@ -1,0 +1,6 @@
+$ cc ldhcp-ex1.c $(pkg-config --cflags --libs luajit) -lm -ldl
+$ cat test.lua 
+address = '255.255.255.255'
+port = 67
+$ ./a.out test.lua
+address: 255.255.255.255, port: 67
