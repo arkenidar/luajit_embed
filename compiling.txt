@@ -1,4 +1,13 @@
+# MinGW64 in Windows
 gcc embed_test_01.c -L/home/dario/luajit/src -I/home/dario/luajit/src -lluajit-5.1.dll # Windows 11 , using MSYS2-MinGW64
 
-sudo apt install libluajit-5.1-dev # in Debian 12
-gcc *.c $(pkgconf --cflags --libs luajit) # generic
+# run test
+a.exe test.lua
+( similar to batch-run.bat )
+
+# in Debian ( or in Ubuntu which is derived from Debian and inherits )
+sudo apt install libluajit-5.1-dev # tested in Debian 12 or Ubuntu 24.04 LTS
+gcc *.c $(pkgconf --cflags --libs luajit) # generic : pkgconf and gcc
+
+# run test
+./a.out test.lua # a.out : GNU Linux's gcc default output
