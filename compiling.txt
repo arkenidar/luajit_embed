@@ -1,1 +1,4 @@
-gcc embed_test_01.c -L/home/dario/luajit/src -I/home/dario/luajit/src -lluajit-5.1.dll
+gcc embed_test_01.c -L/home/dario/luajit/src -I/home/dario/luajit/src -lluajit-5.1.dll # Windows 11 , using MSYS2-MinGW64
+
+sudo apt install libluajit-5.1-dev # in Debian 12
+gcc *.c $(pkgconf --cflags --libs luajit) # generic
