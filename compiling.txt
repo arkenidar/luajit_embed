@@ -1,3 +1,8 @@
+tcc -run embed_test_01.c test.lua
+# https://bellard.org/tcc/
+# Tiny C Compiler -- by Fabrice Bellard
+# https://download.savannah.gnu.org/releases/tinycc/
+
 # MinGW64 in Windows
 gcc embed_test_01.c -L/home/dario/luajit/src -I/home/dario/luajit/src -lluajit-5.1.dll # Windows 11 , using MSYS2-MinGW64
 
