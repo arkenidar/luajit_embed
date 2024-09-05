@@ -12,7 +12,7 @@ a.exe test.lua
 
 # in Debian ( or in Ubuntu which is derived from Debian and inherits )
 sudo apt install libluajit-5.1-dev # tested in Debian 12 or Ubuntu 24.04 LTS
-gcc *.c $(pkgconf --cflags --libs luajit) # generic : pkgconf and gcc
+gcc *.c $(pkgconf --cflags --libs luajit) -lm # generic : pkgconf and gcc
 
 # run test
 ./a.out test.lua # a.out : GNU Linux's gcc default output
